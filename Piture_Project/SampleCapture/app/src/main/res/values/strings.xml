@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">SampleCapture</string>
+    <string name="menu1_title">통계</string>
+    <string name="menu2_title">지도</string>
+    <string name="menu3_title">목록</string>
+</resources>

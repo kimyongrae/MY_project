@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TextRecognizer_Test</string>
+
+    <string name="menu1_title">지도</string>
+    <string name="menu2_title">사진</string>
+    <string name="menu3_title">측정</string>
+    <string name="menu4_title">통계</string>
+    <string name="menu5_title">목록</string>
+
+    <string name="connect_contents">연결하기</string>
+    <string name="capture_contents">캡쳐하기</string>
+    <string name="pause_contents">정지하기</string>
+    <string name="save_contents">저장하기</string>
+    <string name="restart_contents">재시작</string>
+
+
+</resources>

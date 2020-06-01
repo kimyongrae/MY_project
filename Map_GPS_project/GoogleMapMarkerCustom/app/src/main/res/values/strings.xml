@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GoogleMapMarkerCustom</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
