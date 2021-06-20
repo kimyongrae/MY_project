@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">kyr_place_visit</string>
+    <string name="navigation_tab1" translatable="false">map</string>
+    <string name="navigation_tab2" translatable="false">write</string>
+    <string name="navigation_tab3" translatable="false">date</string>
+    <string name="navigation_tab4" translatable="false">list</string>
+</resources>
