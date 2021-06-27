@@ -2,6 +2,7 @@ package kyr.company.kyr_place_visit_ver3.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 
@@ -45,6 +46,10 @@ class PlaceVo constructor() {
     //장소 작성일
     @ColumnInfo(name = "CDATE",defaultValue = "(datetime('now','localtime'))")
     var createDate : String = ""
+
+    @Ignore
+    var fileVolist : MutableList<FileVo> = mutableListOf()
+
 
     constructor(title:String,content:String,address:String):this(){
         this.title=title

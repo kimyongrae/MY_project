@@ -24,12 +24,14 @@ import kyr.company.kyr_place_visit_ver3.R
 import kyr.company.kyr_place_visit_ver3.common.AppContants
 import kyr.company.kyr_place_visit_ver3.common.MyApplication
 import kyr.company.kyr_place_visit_ver3.databinding.MapFragmentBinding
-import kyr.company.kyr_place_visit_ver3.viewmodel.UploadViewModel
+import kyr.company.kyr_place_visit_ver3.viewmodel.MainViewModel
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
 
-
+/**
+ * 첫번째 화면 지도화면
+ */
 class Map_Fragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding : MapFragmentBinding
@@ -56,7 +58,7 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
     var locationCallback: LocationCallback? =null
 
     //맵 선택 라이브 데이터
-    private lateinit var mainviewmodel : UploadViewModel
+    private lateinit var mainviewmodel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +78,7 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainviewmodel= ViewModelProvider(requireActivity()).get(UploadViewModel::class.java)
+        mainviewmodel= ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mapView = view.findViewById(R.id.map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)

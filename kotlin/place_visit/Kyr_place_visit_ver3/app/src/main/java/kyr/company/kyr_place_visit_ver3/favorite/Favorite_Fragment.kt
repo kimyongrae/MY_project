@@ -16,7 +16,9 @@ import kyr.company.kyr_place_visit_ver3.databinding.CalendarFragmentBinding
 import kyr.company.kyr_place_visit_ver3.databinding.FavoriteFragmentBinding
 import kyr.company.kyr_place_visit_ver3.model.PlaceVo
 
-
+/**
+ * 3번째 화면 좋아요를 클릭한 화면
+ */
 class Favorite_Fragment : Fragment() {
 
     private lateinit var binding : FavoriteFragmentBinding

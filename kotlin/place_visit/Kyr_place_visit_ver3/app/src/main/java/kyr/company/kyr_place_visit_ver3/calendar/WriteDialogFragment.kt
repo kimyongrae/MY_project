@@ -37,16 +37,22 @@ import kyr.company.kyr_place_visit_ver3.common.MyApplication
 import kyr.company.kyr_place_visit_ver3.common.TimeCustomDialog
 import kyr.company.kyr_place_visit_ver3.databinding.WriteDialogFragmentBinding
 import kyr.company.kyr_place_visit_ver3.model.FileVo
-import kyr.company.kyr_place_visit_ver3.viewmodel.UploadViewModel
+import kyr.company.kyr_place_visit_ver3.model.PlaceVo
+import kyr.company.kyr_place_visit_ver3.viewmodel.MainViewModel
 import java.util.*
 
+
+/**
+ * 캘린더에서 추가 버튼을 클릭해서 데이터를 집어넣을수 있는 프래그먼트
+ * 
+ */
 
 class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelected,OnMapReadyCallback {
 
     private lateinit var binding : WriteDialogFragmentBinding
 
     //맵 선택 라이브 데이터
-    private lateinit var mainviewmodel : UploadViewModel
+    private lateinit var mainviewmodel : MainViewModel
     private lateinit var pictureAdapter: PictureAdapter
 
     private lateinit var mapView: MapView
@@ -86,7 +92,7 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainviewmodel= ViewModelProvider(requireActivity()).get(UploadViewModel::class.java)
+        mainviewmodel= ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         mapView = view.findViewById(R.id.write_map)
         mapView.onCreate(savedInstanceState)
@@ -159,26 +165,34 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
         //데이터 저장
         binding.save.setOnClickListener {
-//            binding.contents.text
-            //내용을 가져와서 세팅 해줌
-/*            mainviewmodel.uploadcontent.value=binding.contents.text.toString()
-
-            if(mainviewmodel.uploadtitle.value==null){
-                AppContants.toast("제목을 확인 해주세요")
+            
+            if(binding.title.text.toString()==""){
+                AppContants.toast("제목을 입력 해주세요")
                 return@setOnClickListener
             }
 
-            if(mainviewmodel.uploadcontent.value==null || mainviewmodel.uploadcontent.value == ""){
-                AppContants.toast("내용을 확인 해주세요")
+            if(binding.address.text.toString()==""){
+                AppContants.toast("주소를 확인 해주세요")
                 return@setOnClickListener
             }
 
-            if(mainviewmodel.uploadlatLng.value==null){
-                AppContants.toast("장소를 선택 해주세요")
-                return@setOnClickListener
-            }*/
+            var time = binding.time.text.toString()!!.split("~")
 
-            mainviewmodel.DataInsert()
+            val placeVo: PlaceVo = PlaceVo()
+            placeVo.title= binding.title.text.toString()
+            placeVo.content = binding.contents.text.toString()
+            placeVo.startDate =binding.sDateText.text.toString()
+            placeVo.endDate = binding.eDateText.text.toString()
+            placeVo.startTime = time[0]
+            placeVo.endTime = time[1]
+            placeVo.latitude = Latitude
+            placeVo.longitude = Longitude
+            placeVo.address = binding.address.text.toString()
+
+
+            val fileVolist : MutableList<FileVo> = pictureAdapter.getItems()
+
+            mainviewmodel.dataInsert(placeVo,fileVolist)
         }
 
 

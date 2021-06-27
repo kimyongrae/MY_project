@@ -10,4 +10,6 @@
     <color name="red">#FF0000</color>
     <color name="sky_blue">#00D8FF</color>
     <color name="blue">#0000FF</color>
+    <color name="jgray">#CCCCCC</color>
+
 </resources>

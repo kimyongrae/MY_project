@@ -12,7 +12,9 @@ import android.widget.Button
 import android.widget.TextView
 import kyr.company.kyr_place_visit_ver3.R
 
-
+/**
+ * 제목을 입력하는 다이얼로그
+ */
 class Write_TitleDialog (val context: Context) {
 
     private val dialog = Dialog(context) //부모 액티비티의 context가 들어감

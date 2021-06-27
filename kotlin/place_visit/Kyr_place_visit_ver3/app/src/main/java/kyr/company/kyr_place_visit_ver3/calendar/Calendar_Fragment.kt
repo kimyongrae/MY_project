@@ -15,7 +15,9 @@ import kyr.company.kyr_place_visit_ver3.common.MyApplication
 import kyr.company.kyr_place_visit_ver3.databinding.CalendarFragmentBinding
 import kyr.company.kyr_place_visit_ver3.model.PlaceVo
 
-
+/**
+ * 두번째 캘린더 화면
+ */
 class Calendar_Fragment : Fragment() {
 
     private lateinit var binding : CalendarFragmentBinding

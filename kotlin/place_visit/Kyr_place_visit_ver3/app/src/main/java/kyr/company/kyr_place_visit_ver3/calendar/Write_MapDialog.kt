@@ -20,6 +20,9 @@ import kyr.company.kyr_place_visit_ver3.databinding.WriteMapDialogBinding
 import java.io.IOException
 import java.util.*
 
+/**
+ * 지도에서 주소를 가져오는 다이얼로그 화면
+ */
 class Write_MapDialog: DialogFragment(), OnMapReadyCallback {
 
     private lateinit var binding : WriteMapDialogBinding

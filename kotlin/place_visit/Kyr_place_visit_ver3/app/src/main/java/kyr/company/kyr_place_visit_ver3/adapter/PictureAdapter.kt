@@ -44,6 +44,10 @@ class PictureAdapter constructor():RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.item = vo
     }
 
+    fun getItems():MutableList<FileVo>{
+        return this.item
+    }
+
     override fun getItemCount(): Int {
         return item.size
     }

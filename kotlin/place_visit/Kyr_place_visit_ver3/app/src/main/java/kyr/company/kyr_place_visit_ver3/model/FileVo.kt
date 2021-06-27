@@ -27,4 +27,16 @@ class FileVo constructor() {
              this.file_path=file_path
         }
 
+        constructor(parent_bno:Int,file_path: String):this(){
+                this.parent_bno=parent_bno
+                this.file_path=file_path
+        }
+
+
+        override fun toString(): String {
+                return "파일번호:$file_bno\n" +
+                        "파일이름:$file_path\n"+
+                        "부모번호:$parent_bno"
+        }
+
 }
