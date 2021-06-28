@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,6 +77,8 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
     private var Longitude:Double = 0.0
     private var Address =""
 
+    private var title =""
+
     var marker: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,6 +105,14 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
     }
 
     private fun initUI() {
+
+        mainviewmodel.uploadstatus.observe(viewLifecycleOwner, Observer {
+            if(it==1){
+                dismiss()
+                mainviewmodel.uploadstatus.value=0
+            }
+        })
+
 
           pictureAdapter = PictureAdapter()
           binding.picuterRecycler.layoutManager=LinearLayoutManager(MyApplication.applicationContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -134,6 +145,7 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
                 override fun sendDate(title: String) {
                     //전달받은 타이틀
                     binding.title.text=title
+                    this@WriteDialogFragment.title =title
                 }
             })
         }
@@ -165,8 +177,8 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
         //데이터 저장
         binding.save.setOnClickListener {
-            
-            if(binding.title.text.toString()==""){
+
+            if(TextUtils.isEmpty(title)){
                 AppContants.toast("제목을 입력 해주세요")
                 return@setOnClickListener
             }
