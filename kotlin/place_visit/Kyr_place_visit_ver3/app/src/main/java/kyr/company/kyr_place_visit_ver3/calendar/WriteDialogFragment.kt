@@ -39,7 +39,8 @@ import kyr.company.kyr_place_visit_ver3.common.TimeCustomDialog
 import kyr.company.kyr_place_visit_ver3.databinding.WriteDialogFragmentBinding
 import kyr.company.kyr_place_visit_ver3.model.FileVo
 import kyr.company.kyr_place_visit_ver3.model.PlaceVo
-import kyr.company.kyr_place_visit_ver3.viewmodel.MainViewModel
+import kyr.company.kyr_place_visit_ver3.viewmodel.ListViewModel
+import kyr.company.kyr_place_visit_ver3.viewmodel.UploadViewModel
 import java.util.*
 
 
@@ -53,7 +54,13 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
     private lateinit var binding : WriteDialogFragmentBinding
 
     //맵 선택 라이브 데이터
-    private lateinit var mainviewmodel : MainViewModel
+    private lateinit var uploadViewModel: UploadViewModel
+    
+    //리스트 라이브 데이터
+    private lateinit var listViewModel: ListViewModel
+
+
+
     private lateinit var pictureAdapter: PictureAdapter
 
     private lateinit var mapView: MapView
@@ -95,7 +102,8 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainviewmodel= ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        uploadViewModel= ViewModelProvider(requireActivity()).get(UploadViewModel::class.java)
+        listViewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
 
         mapView = view.findViewById(R.id.write_map)
         mapView.onCreate(savedInstanceState)
@@ -106,10 +114,12 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
     private fun initUI() {
 
-        mainviewmodel.uploadstatus.observe(viewLifecycleOwner, Observer {
+        //업로드 상태 확인후 다이얼로그 닫기
+        uploadViewModel.uploadstatus.observe(viewLifecycleOwner, Observer {
             if(it==1){
                 dismiss()
-                mainviewmodel.uploadstatus.value=0
+                uploadViewModel.uploadstatus.value=0
+                listViewModel.placeList()
             }
         })
 
@@ -204,7 +214,7 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
             val fileVolist : MutableList<FileVo> = pictureAdapter.getItems()
 
-            mainviewmodel.dataInsert(placeVo,fileVolist)
+            uploadViewModel.dataInsert(placeVo,fileVolist)
         }
 
 
@@ -384,9 +394,9 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
             //map dialog를 띄움
             val args = Bundle()
-            if(mainviewmodel.currentlatLng.value != null ){
-                args.putDouble("latitude", mainviewmodel.currentlatLng.value!!.latitude)
-                args.putDouble("longitude",mainviewmodel.currentlatLng.value!!.longitude)
+            if(uploadViewModel.currentlatLng.value != null ){
+                args.putDouble("latitude", uploadViewModel.currentlatLng.value!!.latitude)
+                args.putDouble("longitude",uploadViewModel.currentlatLng.value!!.longitude)
             }else{
                 val seoul = LatLng(37.52487, 126.92723)
                 args.putDouble("latitude", seoul.latitude)
@@ -430,8 +440,8 @@ class WriteDialogFragment : DialogFragment(),DatePickerFragment.OnInputDateSelec
 
     private fun setDefaultLocation() {
 
-        if(mainviewmodel.currentlatLng.value!=null){
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainviewmodel.currentlatLng.value, 10f))
+        if(uploadViewModel.currentlatLng.value!=null){
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uploadViewModel.currentlatLng.value, 10f))
         }else{
             val seoul = LatLng(37.52487, 126.92723)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul, 10f))

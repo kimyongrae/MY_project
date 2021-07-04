@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kyr.company.kyr_place_visit_ver3.R
-import kyr.company.kyr_place_visit_ver3.adapter.PlaceAdapter
+import kyr.company.kyr_place_visit_ver3.adapter.CalenderAdapter
 import kyr.company.kyr_place_visit_ver3.common.AppContants
 import kyr.company.kyr_place_visit_ver3.common.MyApplication
 import kyr.company.kyr_place_visit_ver3.databinding.CalendarFragmentBinding
@@ -22,7 +22,7 @@ class Calendar_Fragment : Fragment() {
 
     private lateinit var binding : CalendarFragmentBinding
 
-    var placeAdapter : PlaceAdapter = PlaceAdapter()
+    var calenderAdapter : CalenderAdapter = CalenderAdapter()
 //    var activity : MainActivity? = null
 
     interface ScreenLisener{
@@ -65,17 +65,17 @@ class Calendar_Fragment : Fragment() {
         }
 
         binding.noteRecyclerView.layoutManager= LinearLayoutManager(MyApplication.applicationContext())
-        binding.noteRecyclerView.adapter=placeAdapter
-        placeAdapter.addItem(PlaceVo("테스트1","안녕하세요","경기도 안산시 단원구1"))
-        placeAdapter.addItem(PlaceVo("테스트2","안녕하세요","경기도 안산시 단원구2"))
-        placeAdapter.addItem(PlaceVo("테스트3","안녕하세요","경기도 안산시 단원구3"))
-        placeAdapter.addItem(PlaceVo("테스트4","안녕하세요","경기도 안산시 단원구4"))
-        placeAdapter.addItem(PlaceVo("테스트5","안녕하세요","경기도 안산시 단원구5"))
-        placeAdapter.addItem(PlaceVo("테스트6","안녕하세요","경기도 안산시 단원구6"))
-        placeAdapter.addItem(PlaceVo("테스트7","안녕하세요","경기도 안산시 단원구7"))
-        placeAdapter.addItem(PlaceVo("테스트8","안녕하세요","경기도 안산시 단원구8"))
-        placeAdapter.addItem(PlaceVo("테스트9","안녕하세요","경기도 안산시 단원구9"))
-        placeAdapter.notifyDataSetChanged()
+        binding.noteRecyclerView.adapter=calenderAdapter
+        calenderAdapter.addItem(PlaceVo("테스트1","안녕하세요","경기도 안산시 단원구1"))
+        calenderAdapter.addItem(PlaceVo("테스트2","안녕하세요","경기도 안산시 단원구2"))
+        calenderAdapter.addItem(PlaceVo("테스트3","안녕하세요","경기도 안산시 단원구3"))
+        calenderAdapter.addItem(PlaceVo("테스트4","안녕하세요","경기도 안산시 단원구4"))
+        calenderAdapter.addItem(PlaceVo("테스트5","안녕하세요","경기도 안산시 단원구5"))
+        calenderAdapter.addItem(PlaceVo("테스트6","안녕하세요","경기도 안산시 단원구6"))
+        calenderAdapter.addItem(PlaceVo("테스트7","안녕하세요","경기도 안산시 단원구7"))
+        calenderAdapter.addItem(PlaceVo("테스트8","안녕하세요","경기도 안산시 단원구8"))
+        calenderAdapter.addItem(PlaceVo("테스트9","안녕하세요","경기도 안산시 단원구9"))
+        calenderAdapter.notifyDataSetChanged()
 
     }
 

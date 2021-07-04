@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,26 +12,27 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="1">
     </View>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="83">
+        android:layout_weight="70">
 
         <ImageView
+            android:id="@+id/picture"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/no_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/picture"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher">
-        </ImageView>
+            app:layout_constraintVertical_bias="0.0"></ImageView>
 
         <ImageView
             android:id="@+id/favorite"
@@ -38,7 +41,8 @@
             android:src="@drawable/ic_favorite_off_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            
+            android:layout_marginLeft="5sp"
+            android:layout_marginBottom="5sp"
             ></ImageView>
 
         <ImageView
@@ -47,7 +51,9 @@
             android:id="@+id/picture_more"
             android:src="@drawable/picture_more_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="5sp">
         </ImageView>
 
 
@@ -57,32 +63,36 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="10"
         android:id="@+id/title"
         android:layout_marginLeft="10sp"
         android:gravity="left|center"
         android:text="서울특별시 관악구 신림동"
+        android:textSize="15sp"
         android:textColor="@color/black"
         ></TextView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="left|center"
-        android:layout_weight="5"
+        android:layout_weight="12"
         android:layout_marginLeft="10sp"
         android:text="서울특별시 관악구 신림동 11-21"
+        android:textSize="13sp"
         android:id="@+id/address">
     </TextView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="6"
         android:id="@+id/date_text"
         android:gravity="left|center"
+        android:textSize="10sp"
         android:layout_marginLeft="10sp"
         android:text="2021-07-03~2021-07-04">
     </TextView>
 
 </LinearLayout>
+
+</layout>

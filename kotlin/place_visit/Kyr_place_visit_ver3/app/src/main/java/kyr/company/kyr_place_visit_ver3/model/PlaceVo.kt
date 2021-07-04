@@ -9,6 +9,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "PLACE_TABLE")
 class PlaceVo constructor() {
 
+    companion object{
+        val PLACE_TYPE=0
+        val PLACE_TYPE2=1
+    }
+
     //장소 번호
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "BNO")
@@ -50,6 +55,8 @@ class PlaceVo constructor() {
     @Ignore
     var fileVolist : MutableList<FileVo> = mutableListOf()
 
+    @Ignore
+    var type:Int =0
 
     constructor(title:String,content:String,address:String):this(){
         this.title=title

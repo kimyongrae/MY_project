@@ -24,7 +24,8 @@ import kyr.company.kyr_place_visit_ver3.R
 import kyr.company.kyr_place_visit_ver3.common.AppContants
 import kyr.company.kyr_place_visit_ver3.common.MyApplication
 import kyr.company.kyr_place_visit_ver3.databinding.MapFragmentBinding
-import kyr.company.kyr_place_visit_ver3.viewmodel.MainViewModel
+import kyr.company.kyr_place_visit_ver3.viewmodel.ListViewModel
+import kyr.company.kyr_place_visit_ver3.viewmodel.UploadViewModel
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
@@ -58,7 +59,10 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
     var locationCallback: LocationCallback? =null
 
     //맵 선택 라이브 데이터
-    private lateinit var mainviewmodel : MainViewModel
+    private lateinit var uploadViewModel: UploadViewModel
+    
+    //리스트 라이브 데이터
+    private lateinit var listViewModel: ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +82,8 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainviewmodel= ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        uploadViewModel= ViewModelProvider(requireActivity()).get(UploadViewModel::class.java)
+        listViewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
         mapView = view.findViewById(R.id.map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -165,7 +170,7 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
                     //currentPosition 객체에 위도 경도 설정
                     currentPosition = LatLng(location!!.latitude, location!!.longitude)
 
-                    mainviewmodel.currentlatLng.value = currentPosition
+                    uploadViewModel.currentlatLng.value = currentPosition
                 }catch (e:Exception){
                     e.printStackTrace()
                 }
@@ -173,12 +178,12 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
 
                 //처음에만 defalut_zoom 으로 설정
                 if(init_flag){
-                    cameraUpdate = CameraUpdateFactory.newLatLngZoom(mainviewmodel.currentlatLng.value, DEFAULT_ZOOM)
+                    cameraUpdate = CameraUpdateFactory.newLatLngZoom(uploadViewModel.currentlatLng.value, DEFAULT_ZOOM)
                     init_flag=false
 
                 }else{
 
-                    cameraUpdate = CameraUpdateFactory.newLatLngZoom(mainviewmodel.currentlatLng.value,16f)
+                    cameraUpdate = CameraUpdateFactory.newLatLngZoom(uploadViewModel.currentlatLng.value,16f)
                     if (ActivityCompat.checkSelfPermission(MyApplication.applicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                         ActivityCompat.checkSelfPermission(MyApplication.applicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return
@@ -331,11 +336,11 @@ class Map_Fragment : Fragment(), OnMapReadyCallback {
 
     private fun setDefaultLocation() {
 
-        if(mainviewmodel.currentlatLng.value==null){
+        if(uploadViewModel.currentlatLng.value==null){
             val seoul = LatLng(37.52487, 126.92723)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul, 10f))
         }else{
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainviewmodel.currentlatLng.value, 15f))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uploadViewModel.currentlatLng.value, 15f))
         }
 
 
